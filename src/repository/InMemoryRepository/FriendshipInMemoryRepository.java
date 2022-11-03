@@ -1,0 +1,56 @@
+package repository.InMemoryRepository;
+
+import domain.Friendship;
+import exceptions.RepositoryException;
+import repository.Repository;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class FriendshipInMemoryRepository implements Repository<Long, Friendship> {
+    private Map<Long, Friendship> friendships;
+    public FriendshipInMemoryRepository() {
+        this.friendships = new HashMap<Long, Friendship>();
+    }
+
+    @Override
+    public Friendship findOne(Long id) throws RepositoryException, IllegalArgumentException {
+        if(id == null)
+            throw new IllegalArgumentException("friendship.findOne(): Argument invalid!\n");
+        else {
+            Friendship friendship = (Friendship) friendships.get(id);
+            if (friendship != null)
+                return friendship;
+            else
+                throw new RepositoryException("friendship.findOne(): Id inexistent!\n");
+        }
+    }
+    @Override
+    public Iterable<Friendship> getAll() {
+        return this.friendships.values();
+    }
+    @Override
+    public void add(Friendship friendship) throws RepositoryException, IllegalArgumentException {
+        if(friendship == null)
+            throw new IllegalArgumentException("friendship.add(): Argument invalid!\n");
+        else if(this.friendships.get(friendship.getId()) != null)
+            throw new RepositoryException("friendship.add(): Friendship-ul se afla deja in map!\n");
+        else
+            this.friendships.put(friendship.getId(), friendship);
+    }
+    @Override
+    public void delete(Long id) throws RepositoryException, IllegalArgumentException {
+        if(id == null)
+            throw  new IllegalArgumentException("argument invalid!\n");
+        if(friendships.get(id) != null) {
+            friendships.remove(id);
+            return;
+        }
+        throw new RepositoryException("id inexistent!\n");
+
+    }
+    @Override
+    public int size() {
+        return this.friendships.size();
+    }
+}

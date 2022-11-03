@@ -1,0 +1,10 @@
+unnamed package
+domain
+exceptions
+repository
+repository.FileRepository
+repository.InMemoryRepository
+service
+user_interface
+utils
+validation
