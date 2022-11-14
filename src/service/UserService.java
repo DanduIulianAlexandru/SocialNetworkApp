@@ -37,8 +37,8 @@ public class UserService {
         generateId();
     }
 
-    public void addUser(String firstName, String lastName) throws RepositoryException, ValidationException {
-        User user = new User(this.id, firstName, lastName);
+    public void addUser(String firstName, String lastName, String mail, String password) throws RepositoryException, ValidationException {
+        User user = new User(this.id, firstName, lastName, mail, password);
         this.id ++;
         userValidation.validate(user);
         repoUser.add(user);
@@ -66,5 +66,11 @@ public class UserService {
 
     public int size() {
         return repoUser.size();
+    }
+
+    public void update(Long id, String firstName, String secondName, String mail, String password) throws RepositoryException, ValidationException{
+        User user = new User(id, firstName, secondName, mail, password);
+        userValidation.validate(user);
+        repoUser.update(user);
     }
 }

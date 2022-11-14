@@ -15,7 +15,7 @@ public class FriendshipFileRepository extends FriendshipInMemoryRepository {
         this.fileName = fileName;
         loadData();
     }
-    protected void writeToFile(Iterable<Friendship> entities) {
+    private void writeToFile(Iterable<Friendship> entities) {
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, false))){
             for(Friendship friendship : entities) {
@@ -28,7 +28,7 @@ public class FriendshipFileRepository extends FriendshipInMemoryRepository {
             e.printStackTrace();
         }
     }
-    protected void appendToFile(Friendship entity) {
+    private void appendToFile(Friendship entity) {
         String line = entity.getId() + ";" + entity.getFirstFriend() + ";"+entity.getSecondFriend() + ";";
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))){
@@ -58,35 +58,37 @@ public class FriendshipFileRepository extends FriendshipInMemoryRepository {
             System.out.println(e.getMessage());
         }
     }
-
     @Override
     public Friendship findOne(Long id) throws RepositoryException, IllegalArgumentException {
         loadData();
         return super.findOne(id);
     }
-
     @Override
     public Iterable<Friendship> getAll() {
         loadData();
         return super.getAll();
     }
-
     @Override
     public void add(Friendship friendship) throws RepositoryException, IllegalArgumentException {
         loadData();
         super.add(friendship);
         appendToFile(friendship);
     }
-
     @Override
     public void delete(Long id) throws RepositoryException, IllegalArgumentException {
         loadData();
         super.delete(id);
         writeToFile(super.getAll());
     }
-
     @Override
     public int size() {
         return super.size();
+    }
+
+    @Override
+    public void update(Friendship friendship) throws RepositoryException, IllegalArgumentException {
+        loadData();
+        super.update(friendship);
+        writeToFile(super.getAll());
     }
 }

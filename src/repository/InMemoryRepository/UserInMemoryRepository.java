@@ -53,4 +53,16 @@ public class UserInMemoryRepository  implements Repository<Long, User> {
     public int size() {
         return 0;
     }
+
+    @Override
+    public void update(User user) throws RepositoryException, IllegalArgumentException {
+        if(user == null)
+            throw new IllegalArgumentException("user.update(): Argument invalid!\n");
+
+        if(users.get(user.getId()) != null){
+            users.replace(user.getId(), user);
+            return;
+        }
+        throw new RepositoryException("user.update(): Id-ul utilizatorului este inexistent!\n");
+    }
 }

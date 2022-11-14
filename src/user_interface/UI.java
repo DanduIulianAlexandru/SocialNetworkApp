@@ -19,13 +19,17 @@ import static java.lang.Long.parseLong;
 public class UI{
     private void addUser(UserService userService){
         Scanner scanner = new Scanner(System.in);
-        String firstName, lastName;
+        String firstName, lastName, mail, password;
         System.out.println("Introduceti numele utilizatorului: ");
         firstName = scanner.nextLine();
         System.out.println("Introduceti prenumele utilizatorului: ");
         lastName = scanner.nextLine();
+        System.out.println("Introduceti mail-ul utilizatorului: ");
+        mail = scanner.nextLine();
+        System.out.println("Introduceti parola utilizatorului: ");
+        password = scanner.nextLine();
         try{
-            userService.addUser(firstName, lastName);
+            userService.addUser(firstName, lastName, mail, password);
             System.out.println("User adaugat cu succes!\n");
         }catch(RepositoryException | ValidationException e){
             System.out.println(e.getMessage());
@@ -59,6 +63,33 @@ public class UI{
         }
         if (contor == 0)
             System.out.println("Lista de useri e goala\n");
+    }
+    private void updateUser(UserService userService){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Introduceti id-ul user-ului pe care doriti sa-l modificati: ");
+        String idS;
+        idS = scanner.nextLine();
+        long id = 0;
+        try {
+            id = parseLong(idS);
+        } catch (NumberFormatException e) {
+            System.out.println("Valoare invalida!\n");
+        }
+
+        String firstName, lastName, mail, password;
+        System.out.println("Introduceti noul nume: ");
+        firstName = scanner.nextLine();
+        System.out.println("Introduceti noul prenume: ");
+        lastName = scanner.nextLine();
+        System.out.println("Introduceti noul mail: ");
+        mail = scanner.nextLine();
+        System.out.println("Introduceti noua parola: ");
+        password = scanner.nextLine();
+        try {
+            userService.update(id, firstName, lastName, mail, password);
+        } catch (RepositoryException | ValidationException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void addFriendship(FriendshipService friendshipService){
@@ -122,6 +153,40 @@ public class UI{
         if (contor == 0)
             System.out.println("Lista de prieteni este goala! \n");
     }
+    private void updateFriendship(FriendshipService friendshipService){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Introduceti id-ul prieteniei pe care doriti sa o modificati: ");
+        String idS;
+        idS = scanner.nextLine();
+        long id = 0;
+        long firstFriend = 0;
+        long secondFriend = 0;
+        try {
+            id = parseLong(idS);
+        } catch (NumberFormatException e) {
+            System.out.println("Valoare invalida!\n");
+        }
+        String firstFriendS, secondFriendS;
+        System.out.println("Introduceti id-ul primului user");
+        firstFriendS = scanner.nextLine();
+        try {
+            firstFriend = parseLong(firstFriendS);
+        } catch (NumberFormatException e) {
+            System.out.println("Valoare invalida!\n");
+        }
+        System.out.println("Introduceti id-ul celui de-al doilea user");
+        secondFriendS = scanner.nextLine();
+        try {
+            secondFriend = parseLong(secondFriendS);
+        } catch (NumberFormatException e) {
+            System.out.println("Valoare invalida!\n");
+        }
+        try {
+            friendshipService.update(id, firstFriend, secondFriend);
+        } catch (RepositoryException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     private void printTheNumberOfComunities(FriendshipService friendshipService) {
         int theNumberOfComunities = friendshipService.theNumberOfComunities();
         System.out.println("Numarul de comunitati din retea = " + theNumberOfComunities);
@@ -135,11 +200,13 @@ public class UI{
                 1 - Adauga user\s
                 2 - Sterge user\s
                 3 - Afiseaza lista de useri\s
-                4 - Adauga o prietenie\s
-                5 - Sterge o prietenie\s
-                6 - Afiseaza lista de prietenii\s
-                7 - Afiseaza numarul de comunitati din retea\s
-                8 - Afiseaza cea mai sociabila comunitate din retea\s
+                4 - Modifica un user\s
+                5 - Adauga o prietenie\s
+                6 - Sterge o prietenie\s
+                7 - Afiseaza lista de prietenii\s
+                8 - Modifica o prietenie\s
+                9 - Afiseaza numarul de comunitati din retea\s
+                10 - Afiseaza cea mai sociabila comunitate din retea\s
                 help - reafiseaza meniul\s
                 exit - iesiti din aplicatie
                 """
@@ -166,11 +233,13 @@ public class UI{
                 case "1" -> addUser(userService);
                 case "2" -> deleteUser(userService);
                 case "3" -> printAllUsers(userService);
-                case "4" -> addFriendship(friendshipService);
-                case "5" -> deleteFriendship(friendshipService);
-                case "6" -> printAllFriendships(friendshipService);
-                case "7" -> printTheNumberOfComunities(friendshipService);
-                case "8" -> printTheMostSociableComunity(friendshipService);
+                case "4" -> updateUser(userService);
+                case "5" -> addFriendship(friendshipService);
+                case "6" -> deleteFriendship(friendshipService);
+                case "7" -> printAllFriendships(friendshipService);
+                case "8" -> updateFriendship(friendshipService);
+                case "9" -> printTheNumberOfComunities(friendshipService);
+                case "10" -> printTheMostSociableComunity(friendshipService);
                 case "help" -> meniu();
                 case "exit" -> {
                     System.out.println("byee");

@@ -20,7 +20,7 @@ public class UserFileRepository extends UserInMemoryRepository{
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 List<String> attributes = Arrays.asList(line.split(";"));
-                User user = new User(Long.parseLong(attributes.get(0)),attributes.get(1),attributes.get(2));
+                User user = new User(Long.parseLong(attributes.get(0)),attributes.get(1),attributes.get(2),attributes.get(3), attributes.get(4));
                 boolean ok = true;
                 for(User user1 : super.getAll())
                     if (user1.equals(user)) {
@@ -34,10 +34,10 @@ public class UserFileRepository extends UserInMemoryRepository{
             System.out.println(e.getMessage());
         }
     }
-    protected void writeToFile(Iterable<User> entities) {
+    private void writeToFile(Iterable<User> entities) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, false))){
             for(User e : entities) {
-                String line = e.getId() + ";" + e.getFirstName()+";" + e.getLastName()+";";
+                String line = e.getId() + ";" + e.getFirstName()+";" + e.getLastName()+";" + e.getEmail() + ";" + e.getPassword() + ";";
                 bufferedWriter.write(line);
                 bufferedWriter.newLine();
             }
@@ -46,8 +46,8 @@ public class UserFileRepository extends UserInMemoryRepository{
             e.printStackTrace();
         }
     }
-    protected void appendToFile(User entity) {
-        String line = entity.getId() + ";" + entity.getFirstName() + ";" + entity.getLastName() + ";";
+    private void appendToFile(User entity) {
+        String line = entity.getId() + ";" + entity.getFirstName() + ";" + entity.getLastName() + ";" + entity.getEmail() + ";" + entity.getPassword() + ";";
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))){
             bufferedWriter.write(line);
@@ -57,6 +57,7 @@ public class UserFileRepository extends UserInMemoryRepository{
             e.printStackTrace();
         }
     }
+
     @Override
     public User findOne(Long id) throws RepositoryException, IllegalArgumentException {
         loadData();
@@ -79,7 +80,12 @@ public class UserFileRepository extends UserInMemoryRepository{
         super.delete(id);
         writeToFile(super.getAll());
     }
-
+    @Override
+    public void update(User user) throws RepositoryException, IllegalArgumentException {
+        loadData();
+        super.update(user);
+        writeToFile(super.getAll());
+    }
     @Override
     public int size() {
         return super.size();

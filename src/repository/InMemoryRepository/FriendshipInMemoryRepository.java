@@ -53,4 +53,19 @@ public class FriendshipInMemoryRepository implements Repository<Long, Friendship
     public int size() {
         return this.friendships.size();
     }
+
+    @Override
+    public void update(Friendship friendship) throws RepositoryException, IllegalArgumentException {
+        if(friendship == null)
+            throw new IllegalArgumentException("friendship.update(): Argument invalid!\n");
+        for(Friendship friendship1 : friendships.values()){
+            if(friendship.equals(friendship1))
+                throw new RepositoryException("firendship.update(): Prietenie existenta\n");
+            if(friendship.getId() == friendship1.getId()){
+                friendships.replace(friendship.getId(), friendship);
+                return;
+            }
+        }
+        throw new RepositoryException("friendsship.update(): Id-ul prieteniei este inexistent\n");
+    }
 }

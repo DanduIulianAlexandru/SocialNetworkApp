@@ -81,6 +81,16 @@ public class FriendshipService {
         return repoFriendship.size();
     }
 
+    public void update(Long id, Long firstFriend, Long secondFriend) throws RepositoryException{
+        Friendship friendship = new Friendship(id, firstFriend, secondFriend);
+        Friendship friendship1 = repoFriendship.findOne(id);
+        repoUser.findOne(firstFriend);
+        repoUser.findOne(secondFriend);
+        repoFriendship.update(friendship);
+        graph.deleteEdge(friendship1.getFirstFriend(), friendship1.getSecondFriend());
+        graph.addEdge(firstFriend, secondFriend);
+    }
+
     public int theNumberOfComunities(){
         return graph.theNumberOfComunities(repoUser.getAll());
     }

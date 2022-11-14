@@ -36,6 +36,13 @@ public interface Repository<ID, E>{
      */
     void delete(ID id) throws RepositoryException, IllegalArgumentException;
     /**
+     * actualizeaza un obiect in repository
+     * @param entity obiectul pe care dorim sa-l actualizam, tipul E
+     * @throws RepositoryException daca nu exista obiectul ce se doreste a fi modificat
+     * @throws IllegalArgumentException daca entity este null
+     */
+    void update(E entity) throws RepositoryException, IllegalArgumentException;
+    /**
      * returneaza numarul de obiecte din reporistory
      * @return numarul de obiecte, tipul Integer
      */
