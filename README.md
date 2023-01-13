@@ -23,9 +23,9 @@ Forgot Password screen:
 
 ![Screenshot 2023-01-13 185512](https://user-images.githubusercontent.com/105213297/212378550-4558541e-9796-4fbb-8b2a-ad8fccfcd3c0.png)
 
-Search user screen!:
+Search user screen:
 
-[Screenshot 2023-01-13 185547](https://user-images.githubusercontent.com/105213297/212378609-654eca3e-5d95-47c9-9e90-67ba391358e6.png)
+![Screenshot 2023-01-13 185547](https://user-images.githubusercontent.com/105213297/212378609-654eca3e-5d95-47c9-9e90-67ba391358e6.png)
 
 See the profile of an user:
 
