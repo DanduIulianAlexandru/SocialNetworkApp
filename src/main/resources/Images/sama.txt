@@ -1,0 +1,21 @@
+Luni:
+8 - 11: Curs - Analiza 1
+12 - 14: Curs - Gepmetrie 1
+
+Marti:
+16 - 18: Seminar - Algorithm si programare
+18 - 20: Seminar - Algebra 1
+
+Miercuri:
+12 - 14: Curs - Algebra 1
+14 - 16: Seminar - Logica matematica
+16 - 18: Seminar - Geometrie
+
+Joi:
+8 - 10: Seminar - Analiza
+18 - 20: Lab - Algorithm si progamare
+
+Vineri:
+8 - 10: Curs - Logica matematica
+12 - 14: Curs - Comunicare
+14 - 16: Curs - Algorithm si programare

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="400.0" styleClass="backgroundColor" stylesheets="@../../../css/launcher.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.guisocialnetwork.ForgotPassword">
+   <children>
+      <ImageView fitHeight="237.0" fitWidth="400.0" layoutX="10.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/kappa.jpg" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="66.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please check your inbox" wrappingWidth="332.84527587890625">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="66.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There surely is an email from us ">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="66.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Make sure to check spam">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="332.0" layoutY="669.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hehe">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="48.0" fitWidth="62.0" layoutY="638.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/backButton.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="goBackButton" layoutX="6.0" layoutY="638.0" mnemonicParsing="false" onAction="#goBack" opacity="0.0" prefHeight="48.0" prefWidth="51.0" />
+   </children>
+</AnchorPane>
