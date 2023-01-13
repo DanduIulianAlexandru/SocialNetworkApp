@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.paint.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,7 +15,7 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 400, 700);
 
         stage.setTitle("Dudu's Social Network App");
-        Image icon = new Image("Images/icon.jpg");
+        Image icon = new Image("Images/icon.png");
         stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
